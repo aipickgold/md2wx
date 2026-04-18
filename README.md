@@ -28,6 +28,27 @@
 
 ---
 
+## 🧠 首推用法 · 在 Claude Code 里调用 Skill
+
+**md2wx 最自然的使用方式是作为 Claude Code Skill**,创作全程在对话里完成,不需要切换到任何编辑器。
+
+```bash
+# 一键安装到 Claude Code(项目级)
+mkdir -p .claude/skills && curl -fsSL \
+  https://raw.githubusercontent.com/aipickgold/md2wx/main/skills/md2wx/SKILL.md \
+  -o .claude/skills/md2wx.md
+```
+
+然后在对话里:
+
+> "帮我写一篇讲 AI 时代创作者工具的文章,用聚焦蓝主题,然后发到我公众号草稿箱"
+
+Claude Code 会:① 起草 Markdown → ② 调用 md2wx 渲染 API → ③ 可选地推送到你公众号草稿箱(BYO AppID 模式)。
+
+[→ 完整 Skill 文档](./skills/md2wx/README.md) · [→ 或者直接用网页版](https://aipickgold.com)
+
+---
+
 ## 🚀 独家 · 一键发布到微信公众号
 
 别的在线排版工具让你「复制 → 切到公众号后台 → 粘贴 → 确认样式」,**WxMD 直接推进你的草稿箱**。
