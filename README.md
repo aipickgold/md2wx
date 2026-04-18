@@ -228,7 +228,7 @@ curl -X POST https://aipickgold.com/api/convert \
 
 - 🌐 **官网**:[aipickgold.com](https://aipickgold.com)
 - 📢 **公众号**:宸的拾金笔记
-- ✉️ **邮箱**:hello@aipickgold.com
+- ✉️ **邮箱**:soarwill06@gmail.com
 - 💚 **微信**:`aipickgold`(大浪淘金)· 扫站内二维码加友
 
 ---

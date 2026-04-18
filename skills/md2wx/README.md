@@ -46,4 +46,4 @@ Claude Code 会自动调用 md2wx 的渲染 API + 可选的发布 API。
 
 ---
 
-任何问题:issue 或邮件 hello@aipickgold.com
+任何问题:issue 或邮件 soarwill06@gmail.com

@@ -93,4 +93,4 @@ Claude: 好的!我理解为:
 - [查完整 API 参考](./api-reference.md)
 - [理解 3 层架构](./architecture.md)
 
-遇到问题?开 Issue 或邮件 hello@aipickgold.com。
+遇到问题?开 Issue 或邮件 soarwill06@gmail.com。
