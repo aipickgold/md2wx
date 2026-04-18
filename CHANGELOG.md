@@ -2,6 +2,22 @@
 
 All notable changes to **md2wx** are documented here. This project follows [Semantic Versioning](https://semver.org/) and the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.
 
+## [v1.1.0] · 2026-04-18
+
+### Added
+- 🧠 **Claude Code Skill 官方上线**(`skills/md2wx/SKILL.md`)· 一键安装到 Claude Code,对话式排版+发布
+- 📚 `docs/skill-tutorial.md` · `docs/examples.md`(10 场景)· `docs/architecture.md` · `docs/api-reference.md`
+- README 全面改版为 Skill-first 结构
+
+### Changed
+- 网页版"🚀 一键发布"按钮改为**选择器弹窗**:推荐 Skill 路径,保留网页直接发布作为替代
+- 网页版定位调整为**演示用**,主要使用方式是 Skill
+- Skill 安装命令 + 3 个对话示范加入 README 第一节
+
+### Notes
+- 订阅价格不变:¥19/月 · ¥99/年 · ¥199 Lifetime · ¥299 合并
+- API schema 向后兼容
+
 ## [Unreleased]
 
 ### Planned

@@ -1,18 +1,18 @@
-# md2wx · 微信公众号 Markdown 排版工具
+# md2wx · 微信公众号 Markdown 排版
 
 <div align="center">
 
 <br/>
 
-**AI 时代独立创作者的公众号排版神器**
+**AI 时代创作者的公众号排版神器 · Skill-first**
 
-**把 Markdown 一键变成微信公众号美文 · 40+ 主题 · 发稿只花 30 秒**
+**在 Claude Code 对话里说一句话,排版 + 发布一气呵成**
 
 <br/>
 
 [English](./README.en.md) · **简体中文**
 
-[![Website](https://img.shields.io/badge/官网-aipickgold.com-F43F5E?style=for-the-badge&logoColor=white)](https://aipickgold.com)
+[![Website](https://img.shields.io/badge/\u5b98\u7f51-aipickgold.com-F43F5E?style=for-the-badge&logoColor=white)](https://aipickgold.com)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](./LICENSE)
 [![Themes](https://img.shields.io/badge/Themes-40%2B-6366F1?style=for-the-badge)](https://aipickgold.com/theme-gallery)
 [![Stars](https://img.shields.io/github/stars/aipickgold/md2wx?style=for-the-badge&logo=github&color=yellow)](https://github.com/aipickgold/md2wx/stargazers)
@@ -22,135 +22,166 @@
 
 <br/>
 
-[官网使用](https://aipickgold.com) · [主题画廊](https://aipickgold.com/theme-gallery) · [查看定价](https://aipickgold.com/pricing) · [姐妹产品 md2card](https://github.com/aipickgold/md2card)
+[🧠 Skill 文档](./skills/md2wx/README.md) · [📚 Skill 教程](./docs/skill-tutorial.md) · [🎯 使用示例](./docs/examples.md) · [📐 架构](./docs/architecture.md) · [🌐 官网](https://aipickgold.com) · [🎴 姐妹产品 md2card](https://github.com/aipickgold/md2card)
 
 </div>
 
 ---
 
-## 🧠 首推用法 · 在 Claude Code 里调用 Skill
+## 🧠 Part 1 · 推荐用法(Claude Code Skill)
 
-**md2wx 最自然的使用方式是作为 Claude Code Skill**,创作全程在对话里完成,不需要切换到任何编辑器。
+**md2wx 的主要使用方式不是打开网页,而是作为 Claude Code Skill 安装。**
+安装一次后,在对话里让 AI 帮你"写文章 + 排版 + 发公众号",全程不切窗口。
+
+### 一键安装
 
 ```bash
-# 一键安装到 Claude Code(项目级)
+# 项目级(推荐用于单个写作项目)
 mkdir -p .claude/skills && curl -fsSL \
   https://raw.githubusercontent.com/aipickgold/md2wx/main/skills/md2wx/SKILL.md \
   -o .claude/skills/md2wx.md
+
+# 全局级(所有项目共用)
+mkdir -p ~/.claude/skills && curl -fsSL \
+  https://raw.githubusercontent.com/aipickgold/md2wx/main/skills/md2wx/SKILL.md \
+  -o ~/.claude/skills/md2wx.md
 ```
 
-然后在对话里:
+### 3 个对话示范
 
-> "帮我写一篇讲 AI 时代创作者工具的文章,用聚焦蓝主题,然后发到我公众号草稿箱"
+```
+👤 "帮我写一篇关于 AI 工具的公众号,用聚焦蓝主题"
 
-Claude Code 会:① 起草 Markdown → ② 调用 md2wx 渲染 API → ③ 可选地推送到你公众号草稿箱(BYO AppID 模式)。
+🤖 ✓ 已起草 1280 字
+   ✓ 已用聚焦蓝主题渲染
+   ✓ 已推送到你的公众号草稿箱 📝
+   → mp.weixin.qq.com 草稿箱查看
+```
 
-[→ 完整 Skill 文档](./skills/md2wx/README.md) · [→ 或者直接用网页版](https://aipickgold.com)
+```
+👤 "把这段 markdown 排版成公众号格式,换 5 个不同主题给我看"
+
+🤖 已为你生成 5 个版本:
+   1. 经典橙 · 适合通用场景
+   2. 极简墨 · 适合深度文章
+   3. 聚焦蓝 · 适合商业
+   4. 渐变紫 · 适合品牌
+   5. 卡片绿 · 适合教程
+   你选哪个版本推送?
+```
+
+```
+👤 "用科技黑主题排,加个封面图 https://xxx.jpg"
+
+🤖 ✓ 已渲染 + 已发 + 已带封面
+   草稿 ID: 23xxx...
+```
+
+### Skill 工作流
+
+```
+Claude Code 对话
+    ↓ 起草 Markdown(若没有)
+    ↓ 调 /api/convert 渲染
+    ↓ 调 /api/publish-wechat(BYO AppID+Secret)
+    ↓
+你公众号的草稿箱 📝
+```
+
+👉 **详细教程**:[docs/skill-tutorial.md](./docs/skill-tutorial.md) · **10 个使用场景**:[docs/examples.md](./docs/examples.md)
 
 ---
 
-## 🚀 独家 · 一键发布到微信公众号
+## 💻 Part 2 · 替代方案(网页 Demo / REST API)
 
-别的在线排版工具让你「复制 → 切到公众号后台 → 粘贴 → 确认样式」,**WxMD 直接推进你的草稿箱**。
+如果你不用 Claude Code,也可以走网页或 API。**功能一模一样**,只是手工操作更繁琐。
 
-```
-Markdown 编辑 → 🚀 一键发布 → 📝 公众号草稿箱
-```
+### 网页版
 
-- 填一次 AppID + AppSecret(只存在你的浏览器,不上传服务器)
-- 编辑完 → 点「一键发布」 → **3 秒完成**
-- 告别来回切窗口,真正打通创作闭环
-- 适用于已认证的订阅号 / 服务号(个人订阅号因微信 API 限制暂不支持)
-- **Pro 订阅专享** · 这是 WxMD 相对其他排版工具最大的差异化能力
+打开 [**aipickgold.com**](https://aipickgold.com) → 粘贴 Markdown → 选主题 → 右上角「复制」→ 粘到公众号后台。
 
-> 📌 获取凭证:登录 [mp.weixin.qq.com](https://mp.weixin.qq.com) → 开发 → 基本配置
+或走独家 **🚀 一键发布**(Pro):填入 AppID + AppSecret(仅本地存储)→ 点「发布」3 秒直达草稿箱。
 
----
-
-## ✨ 为什么选 WxMD
-
-公众号创作者 90% 的时间浪费在排版上。**WxMD 把这个时间压缩到 30 秒**。
-
-- **🚀 独家:一键发布到公众号草稿箱** — 其他工具没有的能力(Pro)
-- **打开浏览器就能用** — 不装软件、不注册、免费起步
-- **40+ 精选主题** — 5 大系列 × 8 配色,覆盖科技/资讯/情感/生活/财经
-- **完整 GFM 扩展** — 提示框、对话框、图集、长图、脚注全支持
-- **一键复制到公众号** — 粘贴直出,样式不丢、排版不乱
-- **微信原生兼容** — 每个主题都在微信后台实测过
-- **本地渲染** — 内容不上传服务器,隐私友好
-
----
-
-## 🚀 快速开始
-
-### 方法一:直接浏览器使用(推荐)
-
-```
-1. 打开 https://aipickgold.com
-2. 把 Markdown 粘贴到左侧编辑区
-3. 选择主题 → 右上角「复制」
-4. 粘贴到公众号后台图文编辑器 → 完成!
-```
-
-### 方法二:API 调用(Pro 订阅)
+### REST API
 
 ```bash
 curl -X POST https://aipickgold.com/api/convert \
   -H "Content-Type: application/json" \
-  -H "X-API-Key: your-key-here" \
-  -d '{"markdown": "# Hello\n\n这是正文", "theme": "bytedance"}'
+  -H "X-API-Key: your-key" \
+  -d '{"markdown": "# 标题\n\n正文", "theme": "bytedance"}'
 ```
 
 响应:
-
 ```json
-{
-  "html": "<section>...</section>",
-  "wordCount": 2,
-  "theme": "bytedance"
-}
+{"html": "<section>...</section>", "wordCount": 1280, "theme": "bytedance"}
 ```
 
+👉 **完整 API 文档**:[docs/api-reference.md](./docs/api-reference.md)
+
 ---
 
-## 🎨 主题系列
+## 🎨 40+ 主题 · 5 大系列 × 8 配色
 
-| 系列 | 风格 | 典型场景 |
+| 系列 | 风格 | 适合 |
 |---|---|---|
-| **经典** | 色带标题 + 引用块 + 装饰 | 科技、资讯、评测 |
-| **极简** | 白底黑字,无装饰 | 深度文章、学术 |
-| **聚焦** | 居中对齐,强调阅读节奏 | 商业、金融 |
-| **渐变** | 标题渐变色 | 品牌、营销 |
-| **卡片** | 内容分块,类似微信服务号 | 产品、教程 |
+| **经典** | 色带标题 + 装饰 | 通用、科技、资讯 |
+| **极简** | 白底黑字、无装饰 | 深度文章、学术 |
+| **聚焦** | 居中对称 | 商业、金融 |
+| **渐变** | 渐变色彩 | 品牌、营销 |
+| **卡片** | 分块、服务号风 | 产品、教程 |
 
-每个系列 8 种配色 —— 红、橙、黄、绿、青、蓝、紫、黑。
+每系列 8 种配色:红/橙/黄/绿/青/蓝/紫/黑。
 
-[→ 查看全部 40+ 主题的完整预览](https://aipickgold.com/theme-gallery)
-
----
-
-## 📸 截图
-
-> 截图建设中 —— 可先访问官网 [aipickgold.com](https://aipickgold.com) 看实时效果
+👉 [aipickgold.com/theme-gallery](https://aipickgold.com/theme-gallery) 看全部 40+ 主题的完整预览
 
 ---
 
-## 📝 支持的语法
+## 🚀 一键发布到微信公众号(WxMD 独家)
 
-**标准 Markdown**:H1-H6 标题、加粗、斜体、链接、图片、列表、表格、代码块、引用、分割线
+**这是 WxMD 相对其他排版工具最大的差异化能力**。无论走 Skill 还是网页,最后都能:
 
-**GFM 扩展**:
-- `> [!NOTE]` 蓝色提示
-- `> [!TIP]` 绿色技巧
-- `> [!IMPORTANT]` 紫色重要
-- `> [!WARNING]` 橙色警告
-- `> [!CAUTION]` 红色注意
+- 填一次 AppID + AppSecret(只存你本地)
+- 排版完 → 3 秒推送到你公众号的「草稿箱」
+- 适用于已认证的订阅号 / 服务号
+- **Pro 订阅专享**
 
-**自定义容器**:
-- `:::dialogue[标题]` — 多人对话气泡
-- `:::gallery[标题]` — 多图横滑画廊
-- `:::longimage[标题]` — 长图容器
-- `[^1]` + `[^1]: 内容` — 脚注
+等于把创作闭环的最后一公里(复制 → 切后台 → 粘贴 → 再确认样式)直接抹平。
+
+---
+
+## 📐 技术架构
+
+```
+┌──────────────────────────┐
+│  用户(你)                │
+│  ──────────────────────  │
+│  🧠 Claude Code Skill    │  ← 首推用法
+│        ↓                 │
+└────────┼─────────────────┘
+         ↓ HTTPS
+┌────────┴─────────────────┐
+│  aipickgold.com 服务器    │  ← 我们只做这一层
+│  /api/convert            │
+│  /api/publish-wechat     │
+│  /api/publish-wechat/verify │
+└────────┬─────────────────┘
+         ↓ HTTPS
+┌────────┴─────────────────┐
+│  微信官方 API             │
+│  /cgi-bin/token          │
+│  /cgi-bin/material/add_* │
+│  /cgi-bin/draft/add      │
+└──────────────────────────┘
+
+   平行降级备选:
+   aipickgold.com/ (网页 Demo · 浏览器里跑)
+```
+
+- **用户侧**:Skill(AI 对话触发)或 网页(手动粘贴)
+- **服务器侧**:阿里云 ECS,JSON API 中转,不存内容、不跑 headless Chrome
+- **浏览器侧**:Web Demo 用 React + Tailwind 渲染预览
+
+👉 [docs/architecture.md](./docs/architecture.md) 完整架构说明
 
 ---
 
@@ -158,51 +189,47 @@ curl -X POST https://aipickgold.com/api/convert \
 
 | 档位 | 价格 | 适合 |
 |---|---|---|
-| **免费版** | ¥0 | 个人偶尔排版 |
-| **Pro 年付** | ¥79 / 年 | 活跃创作者 |
-| **Pro Lifetime** | ¥199 买断 | 长期用户 |
-| **合并 Lifetime** | ¥299 | WxMD + [md2card](https://github.com/aipickgold/md2card) 两产品永久 |
+| **免费版** | ¥0 | 每天 10 次 API 调用 + 10 基础主题 |
+| **Pro 月付** | ¥19/月 | 无限调用 + 全部主题 + 一键发布 |
+| **Pro 年付** | ¥99/年 | 月付 × 2 价格 × 12 省 63% |
+| **Pro Lifetime** | ¥199 买断 | 永久 + 所有后续更新 |
+| **合并 Lifetime** | ¥299 | md2wx + [md2card](https://github.com/aipickgold/md2card) 两产品永久 |
 
-[→ 完整定价方案与功能对比](https://aipickgold.com/pricing)
+[→ 完整定价与 FAQ](https://aipickgold.com/pricing)
 
 ---
 
-## 🗺️ 路线图
+## 🗺️ Roadmap · 🕒 CHANGELOG
 
-- [x] 40+ 主题库
-- [x] GFM 扩展语法
-- [x] 一键复制到公众号
-- [x] API 服务
-- [ ] 自定义主题编辑器(2026 Q3)
-- [ ] AI 写作助手集成(2026 Q4)
-- [ ] Claude Code / OpenClaw Skill 适配
+- [📝 v1.1.0](./CHANGELOG.md) — 2026-04 · Skill 官方上线 + 一键发布改选择器 UI + 网页降级为 demo
+- [🗺️ 近期 / 中期 / 长期规划](./docs/roadmap.md)
 
 ---
 
 ## 🎴 姐妹产品
 
-如果你也在做小红书图文,看看我们的另一款工具:
-
-> **[md2card](https://github.com/aipickgold/md2card)** — 把长文一键切成 3:4 小红书卡片,55+ 主题。
+> **[md2card](https://github.com/aipickgold/md2card)** — 把长文一键切成 3:4 小红书卡片,55+ 主题,同样有 Claude Code Skill。
 >
-> 两个产品共用一套账号,合并 Lifetime ¥299 一次搞定。
+> 两产品共用账号,合并 Lifetime ¥299 一次永久拥有。
 
 ---
 
-## 📜 License
+## 📜 License · 🤝 Contributing · 🔒 Security
 
-MIT License · 个人与商业使用均免费,主题版权归作者所有。详见 [LICENSE](./LICENSE)。
+- **License**:MIT(引擎代码开源,Pro 主题商业授权,字体 SIL OFL)
+- **贡献**:欢迎提 Issue / PR。主题设计贡献参考 [CONTRIBUTING.md](./CONTRIBUTING.md)
+- **安全**:[SECURITY.md](./SECURITY.md)
 
 ---
 
-## 👤 作者
+## 👤 作者 · 💬 联系
 
 由 **[宸的拾金笔记](https://aipickgold.com/about)** 独立开发维护。
 
 - 🌐 **官网**:[aipickgold.com](https://aipickgold.com)
 - 📢 **公众号**:宸的拾金笔记
 - ✉️ **邮箱**:hello@aipickgold.com
-- 💚 **微信**:待补充 (即将开放,可先邮件预约)
+- 💚 **微信**:`aipickgold`(大浪淘金)· 扫站内二维码加友
 
 ---
 
