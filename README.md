@@ -10,10 +10,15 @@
 
 <br/>
 
-[![Website](https://img.shields.io/badge/官网-aipickgold.com-F43F5E?style=for-the-badge&logo=webpack&logoColor=white)](https://aipickgold.com)
+[English](./README.en.md) · **简体中文**
+
+[![Website](https://img.shields.io/badge/官网-aipickgold.com-F43F5E?style=for-the-badge&logoColor=white)](https://aipickgold.com)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](./LICENSE)
 [![Themes](https://img.shields.io/badge/Themes-40%2B-6366F1?style=for-the-badge)](https://aipickgold.com/theme-gallery)
 [![Stars](https://img.shields.io/github/stars/aipickgold/md2wx?style=for-the-badge&logo=github&color=yellow)](https://github.com/aipickgold/md2wx/stargazers)
+[![Release](https://img.shields.io/github/v/release/aipickgold/md2wx?style=for-the-badge&color=brightgreen)](https://github.com/aipickgold/md2wx/releases)
+[![Last Commit](https://img.shields.io/github/last-commit/aipickgold/md2wx?style=for-the-badge)](https://github.com/aipickgold/md2wx/commits/main)
+[![Issues](https://img.shields.io/github/issues/aipickgold/md2wx?style=for-the-badge)](https://github.com/aipickgold/md2wx/issues)
 
 <br/>
 
@@ -185,5 +190,9 @@ MIT License · 个人与商业使用均免费,主题版权归作者所有。详�
 **如果 md2wx 帮你省下了排版的时间,请点个 ⭐ Star 支持一下!**
 
 Made with ❤️ by [宸的拾金笔记](https://aipickgold.com) · 2026
+
+💬 [Discussions](https://github.com/aipickgold/md2wx/discussions) · 🐛 [Issues](https://github.com/aipickgold/md2wx/issues) · 🤝 [Contributing](./CONTRIBUTING.md) · 🔒 [Security](./SECURITY.md) · 🗺️ [Roadmap](./docs/roadmap.md)
+
+[![Star History Chart](https://api.star-history.com/svg?repos=aipickgold/md2wx&type=Date)](https://star-history.com/#aipickgold/md2wx&Date)
 
 </div>
