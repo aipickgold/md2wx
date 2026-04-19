@@ -2,6 +2,27 @@
 
 All notable changes to **md2wx** are documented here. This project follows [Semantic Versioning](https://semver.org/) and the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.
 
+## [v1.2.0] · 2026-04-19
+
+### Added
+- 🔑 **Pro API Key 鉴权系统上线** · 购买后通过微信客服 `aipickgold` 接收 `CMWX-XXXX-XXXX-XXXX` 格式的 Key
+- 🧠 Skill CLI 新增 `md2wx config set license-key CMWX-...` 命令,存入 `~/.md2wx.json` 的 `license_key` 字段
+- 🌐 所有 `md2wx convert` 请求自动带 `Authorization: Bearer <license>` 请求头
+- 🌐 Web 编辑器右侧新增**圆形 Pro 按钮**(免费状态会 pulsing 提示,点击弹出激活框)
+
+### Changed
+- `/api/convert`:有 key → 代理到 md2wechat.app 高级渲染;无 key → 返回 200 `{ok:false, free:true}` 触发前端本地降级
+- `/api/publish-wechat` + `/api/publish-wechat/verify`:**强制要 Key**,无 Key 直接 401
+- 环境变量优先级:`MD2WX_LICENSE_KEY` > config.license_key > legacy `MD2WECHAT_API_KEY`(向后兼容)
+
+### Security
+- Bearer token 用常量时比较防时序攻击
+- bundle-lifetime(合并 Lifetime ¥299)的 Key 同时解锁 [md2card](https://github.com/aipickgold/md2card),产品独立 Key 跨产品使用会返回 `wrong_product`
+
+### Notes
+- 数据隐私:License 数据只保存在作者自建的阿里云 ECS,不使用第三方数据库
+- 软校验:客户端激活后 7 天内离线可用
+
 ## [v1.1.0] · 2026-04-18
 
 ### Added

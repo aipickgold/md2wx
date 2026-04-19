@@ -185,15 +185,44 @@ curl -X POST https://aipickgold.com/api/convert \
 
 ---
 
+## 🔑 API Key(Pro 用户必读)
+
+购买后通过**微信客服** `aipickgold` 接收一串 API Key(格式:`CMWX-XXXX-XXXX-XXXX`)。两种方式激活:
+
+### 方式 A · Skill(终端,推荐)
+
+```bash
+md2wx config set license-key CMWX-XXXX-XXXX-XXXX
+```
+
+或环境变量 `export MD2WX_LICENSE_KEY=CMWX-...`。之后所有 `md2wx convert` / 发布命令自动带 `Authorization: Bearer` 请求头,**全程终端闭环,不经过浏览器**。
+
+### 方式 B · 网页版(手动)
+
+打开 [`aipickgold.com/`](https://aipickgold.com/) → 右侧圆形按钮 🔑 → 粘贴 Key → 激活。
+
+### 特性
+
+- ✅ **一键发布 Pro 独家**:免费版无法调 `/api/publish-wechat`,必须有 Key
+- ✅ **产品作用域**:md2wx 单独 Key 只解锁公众号排版;合并 Lifetime(¥299)同时解锁 [md2card](https://github.com/aipickgold/md2card)
+- ✅ **软降级**:`/api/convert` 在无 Key 时会返回 200 `{ok:false, free:true}`,客户端 fallback 到本地渲染(基础主题)
+- ✅ **隐私**:License 只存在作者自建的阿里云 ECS,不经过第三方
+- ✅ **退款/吊销**:admin 立即吊销,下次请求 401
+
+---
+
 ## 💎 定价
 
 | 档位 | 价格 | 适合 |
 |---|---|---|
-| **免费版** | ¥0 | 每天 10 次 API 调用 + 10 基础主题 |
-| **Pro 月付** | ¥19/月 | 无限调用 + 全部主题 + 一键发布 |
+| **免费版** | ¥0 | 本地渲染 + 10 基础主题(无 API 调用) |
+| **Pro 月付** | ¥19/月 | API 高级渲染 + 全部主题 + 一键发布 |
 | **Pro 年付** | ¥99/年 | 月付 × 2 价格 × 12 省 63% |
 | **Pro Lifetime** | ¥199 买断 | 永久 + 所有后续更新 |
 | **合并 Lifetime** | ¥299 | md2wx + [md2card](https://github.com/aipickgold/md2card) 两产品永久 |
+
+购买后**在 24 小时内**通过微信客服 `aipickgold` 发放 API Key。
+有任何激活问题也走这个渠道。
 
 [→ 完整定价与 FAQ](https://aipickgold.com/pricing)
 
@@ -201,6 +230,7 @@ curl -X POST https://aipickgold.com/api/convert \
 
 ## 🗺️ Roadmap · 🕒 CHANGELOG
 
+- [🔑 v1.2.0](./CHANGELOG.md) — 2026-04-19 · Pro API Key 鉴权系统上线 + Skill 支持 license-key config
 - [📝 v1.1.0](./CHANGELOG.md) — 2026-04 · Skill 官方上线 + 一键发布改选择器 UI + 网页降级为 demo
 - [🗺️ 近期 / 中期 / 长期规划](./docs/roadmap.md)
 
